@@ -6,6 +6,12 @@ Este repositório contém anotações, exemplos de código e experimentos realiz
 
 O livro **Assembly na Prática** oferece uma abordagem prática para o ensino da linguagem Assembly, com foco no uso do NASM para a criação de programas em sistemas operacionais baseados em Linux (Ubuntu). Ao longo do livro, diversos exemplos e desafios são apresentados, desde o tradicional "Hello World" até programas mais avançados que interagem com C++.
 
+### Links Importantes
+
+- **Autor**: [Fernando Anselmo no GitHub](https://github.com/fernandoans)
+- **Livro**: [Assembly na Prática (GitHub)](https://github.com/fernandoans/publicacoes/tree/master/LivroAsm)
+- **Playlist no YouTube**: [Assembly na Prática](https://www.youtube.com/playlist?list=PLxTkH01AauxRm0LFLlOA9RR5O6hBLqBtC)
+
 ## Estrutura do Repositório
 
 - **Capítulo 1: Conceitos Introdutórios**

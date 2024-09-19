@@ -12,3 +12,19 @@ segment .data
 
 segment .bss
     BUFFER      resb    0x1     ; 4 bytes
+
+segment .text
+
+; -----------------------------------------------
+; Saída do Resultado no Terminal
+; -----------------------------------------------
+; Entrada:  valor String em BUFFER
+;   Saída:  valor no terminal
+; -----------------------------------------------
+saidaResultado:
+    mov eax, SYS_WRITE
+    mov ebx, STD_OUT
+    mov ecx, BUFFER
+    mov edx, TAM_BUFFER
+    int SYS_CALL
+    ret

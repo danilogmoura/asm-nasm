@@ -23,7 +23,7 @@ converter_valor:
 
 mostrar_valor:
     call int_to_string
-    call saidaResultado
+    call saida_resultado
     ret
 
 string_to_int:

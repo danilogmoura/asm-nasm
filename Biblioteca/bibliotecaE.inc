@@ -21,10 +21,29 @@ segment .text
 ; Entrada:  valor String em BUFFER
 ;   Saída:  valor no terminal
 ; -----------------------------------------------
-saidaResultado:
+saida_resultado:
     mov eax, SYS_WRITE
     mov ebx, STD_OUT
     mov ecx, BUFFER
     mov edx, TAM_BUFFER
     int SYS_CALL
+    ret
+
+; -----------------------------------------------
+; Calcular o tamanho da String
+; -----------------------------------------------
+; Entrada:  valor String em ECX
+;   Saída:  tamanho da String em EDX
+; -----------------------------------------------
+tamanho_string:
+    mov edx, ecx
+
+proximo_caractere:
+    cmp byte[edx], NULL
+    jz fim_calculo
+    inc edx
+    jmp proximo_caractere
+
+fim_calculo:
+    sub edx, ecx
     ret

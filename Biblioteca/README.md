@@ -17,3 +17,26 @@ Para utilizar a biblioteca, adicione a linha abaixo no início de seu programa A
 ```asm
 %include 'bibliotecaE.inc'
 ```
+
+## Conteúdo da Biblioteca `bibliotecaE.inc`
+
+### Definições
+
+- **LF**: Line Feed (quebra de linha)
+- **NULL**: Final de string
+- **SYS_EXIT**: Código de saída
+- **RET_EXIT**: Código de retorno para sucesso
+- **STD_IN**: Entrada padrão
+- **STD_OUT**: Saída padrão
+- **SYS_READ**: Operação de leitura
+- **SYS_WRITE**: Operação de escrita
+- **SYS_CALL**: Chamada do sistema operacional
+- **TAM_BUFFER**: Tamanho do buffer
+
+### Segmento `.bss`
+
+- **BUFFER**: 1 byte reservado
+
+### Funções
+
+- **saidaResultado**: Exibe uma string no terminal

@@ -15,6 +15,10 @@
 
 ** Além desses, existem os registradores de r8 a r15 (de 64 bits) e r8d a r15d (de 32 bits) que são utilizados nas movimentações correntes durante a nossa programação.
 
+Devemos entender que os operadores: `AH`, `AL`, `BH`, `BL`,
+`CH`, `CL`, `DH` e `DL` são o que chamamos de segmentos de 8 bits.
+Toda vez que tratamos de um único caractere temos um byte isolado (ou seja, 8 bits) e podemos usar esses operadores para realizar algumas transformações.
+
 ## Mais dois valores para decorarmos com o registrador EAX
 
 | Decimal | Hexadecimal | Utilização                                              |

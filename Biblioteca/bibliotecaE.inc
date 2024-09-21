@@ -1,4 +1,4 @@
-segment .data
+section .data
     LF              equ     0xA     ; Line Feed (nova linha)
     STR_END         equ     0xD     ; Terminador de String
     SYS_EXIT        equ     0x1     ; Código de sistema para sair
@@ -10,10 +10,10 @@ segment .data
     INT_80H         equ     0x80    ; Interrupção para chamar o kernel
     BUFFER_SIZE     equ     0xA     ; Tamanho do buffer
 
-segment .bss
+section .bss
     BUFFER          resb    0x1     ; 1 byte reservado para o buffer
 
-segment .text
+section .text
 
 ; -----------------------------------------------
 ; Saída do Resultado no Terminal

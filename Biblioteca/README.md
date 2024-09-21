@@ -22,15 +22,15 @@ Para utilizar a biblioteca, adicione a linha abaixo no início de seu programa A
 
 ### Definições
 
-- **LF**: Line Feed (quebra de linha)
-- **NULL**: Final de string
-- **SYS_EXIT**: Código de saída
-- **RET_EXIT**: Código de retorno para sucesso
-- **STD_IN**: Entrada padrão
-- **STD_OUT**: Saída padrão
-- **SYS_READ**: Operação de leitura
-- **SYS_WRITE**: Operação de escrita
-- **SYS_CALL**: Chamada do sistema operacional
+- **LF**: Line Feed (nova linha)
+- **NULL**: Terminador de String
+- **SYS_EXIT**: Código de sistema para sair
+- **RET_EXIT**: Código de saída com sucesso
+- **STD_IN**: Entrada padrão (stdin)
+- **STD_OUT**: Saída padrão (stdout)
+- **SYS_READ**: Código de sistema para leitura
+- **SYS_WRITE**: Código de sistema para escrita
+- **SYS_CALL**: Interrupção para chamar o kernel
 - **TAM_BUFFER**: Tamanho do buffer
 
 ### Segmento `.bss`
@@ -39,4 +39,5 @@ Para utilizar a biblioteca, adicione a linha abaixo no início de seu programa A
 
 ### Funções
 
-- **saidaResultado**: Exibe uma string no terminal
+- **imprimir_string**: Exibe uma string no terminal
+- **calcular_tamanho_string**: Calcula o tamanho de uma string

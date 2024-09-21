@@ -22,10 +22,9 @@ segment .text
 ;   Saída:  valor no terminal
 ; -----------------------------------------------
 imprimir_string:
+    call calcular_tamanho_string
     mov eax, SYS_WRITE
     mov ebx, STDOUT
-    mov ecx, BUFFER
-    mov edx, BUFFER_SIZE
     int INT_80H
     ret
 

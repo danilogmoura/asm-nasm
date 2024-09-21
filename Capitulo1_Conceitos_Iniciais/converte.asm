@@ -1,7 +1,7 @@
 %include "../Biblioteca/bibliotecaE.inc"
 
 section .data
-    valor   dw  '105', INT_80H  ; Variável do tipo Double Word (ou seja um caracter)
+    valor   dw  '105', LF   ; Variável do tipo Double Word (ou seja um caracter)
 
 section .text
 
@@ -46,6 +46,8 @@ int_to_string:
     lea esi, [BUFFER]           ; Carrega o endereço inicial do buffer em `esi`
     add esi, 0x9                ; Move `esi` para 9 bytes à frente do início ex: se endereço é 0x1000 ele vai para 0x1009
     mov byte[esi], STR_END      ; Coloca um caractere de nova linha no final do buffer
+    dec esi
+    mov byte[esi], LF           
     mov ebx, 0xA                ; Define o divisor como 10 para conversão decimal
 
 .proximo_digito:
@@ -56,4 +58,5 @@ int_to_string:
     mov [esi], dl               ; Coloca o dígito convertido no buffer
     test eax, eax               ; Testa se `eax` é 0
     jnz .proximo_digito         ; Continua se ainda houver dígitos para converter
+    mov ecx, esi
     ret

@@ -8,7 +8,7 @@ section .text
 global _start
 
 _start:
-    mov eax, [array + 4 * 3]            ; Carrega o valor do quarto elemento do array em EAX
+    mov eax, [array + 4 * 3]            ; Carrega o valor do quarto elemento do array em EAX, lembrando que 3 é o "índice" e que o array começa no "0"
     call int_to_string                  ; Converte o valor inteiro em EAX para uma string
     call imprimir_string                ; Imprime a string resultante no termial
     mov ecx, NEW_LINE

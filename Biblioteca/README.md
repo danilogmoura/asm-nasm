@@ -22,16 +22,18 @@ Para utilizar a biblioteca, adicione a linha abaixo no início de seu programa A
 
 ### Definições
 
-- **LF**: Line Feed (nova linha)
-- **NULL**: Terminador de String
-- **SYS_EXIT**: Código de sistema para sair
-- **RET_EXIT**: Código de saída com sucesso
-- **STD_IN**: Entrada padrão (stdin)
-- **STD_OUT**: Saída padrão (stdout)
-- **SYS_READ**: Código de sistema para leitura
-- **SYS_WRITE**: Código de sistema para escrita
-- **SYS_CALL**: Interrupção para chamar o kernel
-- **TAM_BUFFER**: Tamanho do buffer
+| Nome         | Descrição                          |
+|--------------|------------------------------------|
+| **LF**       | Line Feed (nova linha)             |
+| **NULL**     | Terminador de String               |
+| **SYS_EXIT** | Código de sistema para sair        |
+| **RET_EXIT** | Código de saída com sucesso        |
+| **STD_IN**   | Entrada padrão (stdin)             |
+| **STD_OUT**  | Saída padrão (stdout)              |
+| **SYS_READ** | Código de sistema para leitura     |
+| **SYS_WRITE**| Código de sistema para escrita     |
+| **SYS_CALL** | Interrupção para chamar o kernel   |
+| **TAM_BUFFER**| Tamanho do buffer                 |
 
 ### Segmento `.bss`
 
@@ -39,5 +41,8 @@ Para utilizar a biblioteca, adicione a linha abaixo no início de seu programa A
 
 ### Funções
 
-- **imprimir_string**: Exibe uma string no terminal
-- **calcular_tamanho_string**: Calcula o tamanho de uma string
+| Função                  | Descrição                           |
+|-------------------------|-------------------------------------|
+| **imprimir_string**     | Exibe uma string no terminal        |
+| **calcular_tamanho_string** | Calcula o tamanho de uma string    |
+| **int_to_string**       | Converte um inteiro para uma string |

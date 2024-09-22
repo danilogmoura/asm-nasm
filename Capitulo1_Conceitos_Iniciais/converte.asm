@@ -22,7 +22,7 @@ converter_valor:
     ret
 
 mostrar_valor:
-    call int_to_string
+    call local_int_to_string
     call imprimir_string
     ret
 
@@ -42,7 +42,7 @@ string_to_int:
     mov eax, ebx                ; Move o resultado final para eax
     ret
 
-int_to_string:
+local_int_to_string:
     lea esi, [BUFFER]           ; Carrega o endereço inicial do buffer em `esi`
     add esi, 0x9                ; Move `esi` para 9 bytes à frente do início ex: se endereço é 0x1000 ele vai para 0x1009
     mov byte[esi], STR_END      ; Coloca um caractere de nova linha no final do buffer

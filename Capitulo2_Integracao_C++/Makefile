@@ -7,27 +7,34 @@ DEBUG ?= 0						# 0 para sem depuração, 1 para com depuração
 # Se DEBUG for 1, adiciona flags de depuração; caso contrário, remove símbolos no link.
 ifeq ($(DEBUG), 1)
     NASM_FLAGS = -g -F dwarf	# Adiciona símbolos de depuração DWARF ao código Assembly.
-    LD_FLAGS =					# Não remove os símbolos no link.
+    GPP_FLAGS = -g				# Adiciona símbolos de depuração ao código C++.
 else
     NASM_FLAGS =				# Não adiciona símbolos de depuração.
-    LD_FLAGS = -s				# Remove símbolos durante o processo de linkagem.
+    GPP_FLAGS = -O2				# Otimizações no código C++.
 endif
 
 # Regra principal (default) que será executada quando chamar `make`.
 # Dependendo do valor de DEBUG, o clean será chamado no início ou no final.
-all: conditional_clean $(NOME).o
-	@ld -m elf_i386 $(LD_FLAGS) -o $(NOME) $(NOME).o  # Linka o arquivo objeto, aplicando as flags apropriadas.
-	@./$(NOME)                                        # Executa o programa.
-	@if [ "$(DEBUG)" -eq "0" ]; then $(MAKE) --no-print-directory clean; fi # Limpa arquivos ao final somente se DEBUG for 0.
+all: conditional_clean $(NOME)
+	@if [ "$(DEBUG)" -eq "0" ]; then ./$(NOME); fi  							# Executa o programa automaticamente se DEBUG for 0
+	@if [ "$(DEBUG)" -eq "0" ]; then $(MAKE) --no-print-directory clean; fi		# Limpa arquivos ao final se DEBUG for 0
 
-# Regra para compilar o arquivo Assembly (.asm) para um objeto (.o).
-# Usa o NASM com o formato elf32 para arquitetura de 32 bits.
-%.o: %.asm
-	@nasm -f elf32 $(NASM_FLAGS) $<		# Compila o arquivo .asm usando as flags apropriadas (com ou sem depuração).
+# Regra para compilar o código C++ e o Assembly, e então linkar.
+# Adicionar a flag -z noexecstack ao linker no Makefile resolve o warning e garante que o executável final não tenha uma pilha executável
+$(NOME): $(NOME).o $(NOME)_asm.o
+	@g++ $(GPP_FLAGS) -m64 -z noexecstack -o $(NOME) $(NOME).o $(NOME)_asm.o	# Linka os arquivos objeto
+
+# Regra para compilar o arquivo C++.
+$(NOME).o: $(NOME).cpp
+	@g++ $(GPP_FLAGS) -m64 -c $(NOME).cpp -o $(NOME).o			# Compila o código C++ para objeto
+
+# Regra para compilar o arquivo Assembly.
+$(NOME)_asm.o: $(NOME).asm
+	@nasm -f elf64 $(NASM_FLAGS) $(NOME).asm -o $(NOME)_asm.o	# Compila o código Assembly para objeto
 
 # Regra para limpar os arquivos .o e o executável.
 clean:
-	@rm -rf $(NOME) *.o                 # Remove arquivos antigos.
+	@rm -rf $(NOME) *.o $(NOME)_asm.o							# Remove arquivos antigos.
 
 # Executa o 'clean' condicionalmente no início apenas se DEBUG for 1.
 conditional_clean:

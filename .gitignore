@@ -1,1 +1,4 @@
 *.o
+*.gdb
+*.gdb_history
+*input.txt

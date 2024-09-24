@@ -23,3 +23,10 @@
 | **R8**          | Registrador adicional, usado para passar o quinto argumento para funções                                    | Quinto argumento de função                                   | 64        |
 | **R9**          | Registrador adicional, usado para passar o sexto argumento para funções                                     | Sexto argumento de função                                    | 64        |
 | **R10-R15**     | Registradores de uso geral adicionais, frequentemente usados em operações temporárias e de propósito geral  | Uso geral                                                    | 64        |
+
+### Principais funções dos registradores
+
+- **RSI/ESI**: Geralmente usado como fonte em operações de string ou como o terceiro argumento para funções.
+- **RDI/EDI**: Usado como destino em operações de string ou como o quarto argumento para funções.
+- **RAX/EAX**: Usado como acumulador em operações aritméticas e também para retorno de funções.
+- **RCX/ECX**: Usado como contador de loops ou o primeiro argumento de funções.

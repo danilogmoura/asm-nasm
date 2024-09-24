@@ -46,3 +46,4 @@ Para utilizar a biblioteca, adicione a linha abaixo no início de seu programa A
 | **imprimir_string**     | Exibe uma string no terminal        |
 | **calcular_tamanho_string** | Calcula o tamanho de uma string    |
 | **int_to_string**       | Converte um inteiro para uma string |
+| **string_to_int**       | Converte uma string para um inteiro |

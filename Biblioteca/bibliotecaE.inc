@@ -12,14 +12,14 @@ section .data
     NEW_LINE        db      LF, STR_END 
 
 section .bss
-    BUFFER          resb    0x1     ; 1 byte reservado para o buffer
+    BUFFER          resb    0x4         ; 4 byte reservado para o buffer
 
 section .text
 
 ; -----------------------------------------------
 ; Saída do Resultado no Terminal
 ; -----------------------------------------------
-; Entrada:  valor String em BUFFER
+; Entrada:  valor String em ECX
 ;   Saída:  valor no terminal
 ; -----------------------------------------------
 imprimir_string:
@@ -38,11 +38,11 @@ imprimir_string:
 calcular_tamanho_string:
     mov edx, ecx
 
-proximo_caractere:
+.proximo_caractere:
     cmp byte[edx], STR_END
     jz fim_calculo
     inc edx
-    jmp proximo_caractere
+    jmp .proximo_caractere
 
 fim_calculo:
     sub edx, ecx
@@ -55,22 +55,51 @@ fim_calculo:
 ;   Saída:  String em EDX
 ; -----------------------------------------------
 int_to_string:
-    lea esi, [BUFFER]       ; Carrega o endereço do BUFFER no registrador ESI
-    add esi, 0xC            ; Ajusta ESI para apontar para a posição final da string no buffer (assumindo um buffer de tamanho suficiente)
-    mov byte[esi], STR_END  ; Coloca um caractere de nova linha (LF) no final da string
-    mov ebx, 0xA            ; Define o divisor como 10 (para conversão de base decimal)
+    lea esi, [BUFFER]               ; Carrega o endereço do BUFFER no registrador ESI
+    add esi, 0xC                    ; Ajusta ESI para apontar para a posição final da string no buffer (assumindo um buffer de tamanho suficiente)
+    mov byte[esi], STR_END          ; Coloca um caractere de nova linha (LF) no final da string
+    mov ebx, 0xA                    ; Define o divisor como 10 (para conversão de base decimal)
 
 .proximo_digito:
-    xor edx, edx            ; Limpa o registrador EDX (necessário para a divisão)
-    div ebx                 ; Divide EAX por 10, resultado em EAX e resto em EDX
-    add dl, "0"             ; Converte o dígito (resto) para seu equivalente ASCII
-    dec esi                 ; Move o ponteiro ESI para a posição anterior no buffer
-    mov [esi], dl           ; Armazena o dígito convertido no buffer
+    xor edx, edx                    ; Limpa o registrador EDX (necessário para a divisão)
+    div ebx                         ; Divide EAX por 10, resultado em EAX e resto em EDX
+    add dl, "0"                     ; Converte o dígito (resto) para seu equivalente ASCII
+    dec esi                         ; Move o ponteiro ESI para a posição anterior no buffer
+    mov [esi], dl                   ; Armazena o dígito convertido no buffer
     test eax, eax
-    jnz .proximo_digito     ; Se EAX não for zero, continua o loop para processar o próximo dígito
-    mov ecx, esi            ; Copia o ponteiro do início da string (ESI) para ECX
+    jnz .proximo_digito             ; Se EAX não for zero, continua o loop para processar o próximo dígito
+    mov ecx, esi                    ; Copia o ponteiro do início da string (ESI) para ECX
     ret
 
-                            ; Registrador DL: É o byte menos significativo de EDX. No contexto da conversão de 
-                            ; inteiro para string, DL é usado para armazenar o resto da divisão (um dígito) e 
-                            ; convertê-lo para seu equivalente ASCII.
+                                    ; Registrador DL: É o byte menos significativo de EDX. No contexto da conversão de
+                                    ; inteiro para string, DL é usado para armazenar o resto da divisão (um dígito) e
+                                    ; convertê-lo para seu equivalente ASCII.
+
+; -----------------------------------------------
+; Converter String para Inteiro
+; -----------------------------------------------
+; Entrada:  String em ECX
+;   Saída:  valor Inteiro em EAX
+; -----------------------------------------------
+string_to_int:
+    ; xor ebx, ebx                    ; Limpa o registrador EBX (usado para armazenar o valor inteiro)
+    mov esi, ecx                    ; Carrega o endereço da String em ESI
+    call calcular_tamanho_string    ; Calcula o tamanho da String adiciona no registrado edx
+    mov ecx, edx                    ; Atribui ao contator do loop o valor calculado acima
+
+.proxima_string:
+    movzx eax, byte[esi]            ; Carrega o byte localizado no endereço apontado por ESI em EAX,
+                                    ; zero-extende o valor para 32 bits. Isso significa que os 8 bits
+                                    ; menos significativos de EAX conterão o valor do byte, e os 24 bits
+                                    ; mais significativos serão preenchidos com zeros.
+    
+    inc esi                         ; Incremta o ponteiro para ESI
+    sub al, '0'                     ; Converte o caractere ASCII numérico para seu valor numérico.
+                                    ; Exemplo: Se '1' (ASCII 49) estiver em AL, após a subtração: 49 - 48 (0 Decimal) = 1.
+                                    ; O valor ASCII de '0' é 48, então subtrair '0' de qualquer dígito ASCII dá o valor numérico real.
+    
+    imul ebx, 0xA                  ; Multiplica EBX por 10 (EBX = EBX * 10 = 1 * 30 = 30)
+    add ebx, eax
+    loop .proxima_string            ; Decrementa ECX e repete o loop se ECX não for zero
+    mov eax, ebx
+    ret                   

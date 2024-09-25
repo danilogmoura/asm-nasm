@@ -40,18 +40,25 @@ O livro **Assembly na Prática** oferece uma abordagem prática para o ensino da
 Para compilar e executar os programas deste repositório, siga os passos abaixo:
 
 1. Instale o NASM no seu sistema:
+
    ```bash
    sudo apt install nasm
    ```
+
 2. Compile o código Assembly:
+
    ```bash
    nasm -f elf64 nome_do_programa.asm
    ```
+
 3. Linke o arquivo objeto para gerar o executável:
+
    ```bash
    ld -s -o nome_do_executavel nome_do_programa.o
    ```
-5. Execute o programa:
+
+4. Execute o programa:
+
    ```bash
    ./nome_do_executavel
    ```

@@ -1,4 +1,4 @@
-%include "../Biblioteca/bibliotecaE.inc"
+%include "./bibliotecaE.inc"
 
 section .data
     array: dd 10, 20, 13, 14, 55

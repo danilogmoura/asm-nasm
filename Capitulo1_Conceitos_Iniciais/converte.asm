@@ -1,4 +1,4 @@
-%include "../Biblioteca/bibliotecaE.inc"
+%include "./bibliotecaE.inc"
 
 section .data
     valor   db  "105", STR_END  	; Variável do tipo Double Word (ou seja um caracter)

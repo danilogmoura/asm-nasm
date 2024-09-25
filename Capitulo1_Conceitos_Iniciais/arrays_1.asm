@@ -1,4 +1,4 @@
-%include "../Biblioteca/bibliotecaE.inc"
+%include "./bibliotecaE.inc"
 
 section .data
     msg_1: db "Parte 1", LF, STR_END

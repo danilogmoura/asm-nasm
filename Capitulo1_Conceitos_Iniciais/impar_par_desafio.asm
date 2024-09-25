@@ -1,4 +1,4 @@
-%include "../Biblioteca/bibliotecaE.inc"
+%include "./bibliotecaE.inc"
 
 section .data
     msg_impar   dw      "impar", LF, STR_END

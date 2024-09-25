@@ -1,4 +1,4 @@
-%include "../Biblioteca/bibliotecaE.inc"
+%include "./bibliotecaE.inc"
 
 section .data
     titulo              db      LF, "+-------------+", LF, \

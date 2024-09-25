@@ -88,8 +88,6 @@ Esses flags são então usados por instruções de salto condicional subsequente
 
 # Biblioteca de Funções e Variáveis Comuns
 
-Este diretório contém a biblioteca `bibliotecaE.inc`, que inclui funções e definições comuns para uso nos programas Assembly ao longo dos capítulos. Ela foi criada para evitar a repetição de código e centralizar funções úteis que podem ser reutilizadas em diferentes programas.
-
 ## Funcionalidades Incluídas
 
 A biblioteca contém definições de variáveis e funções como:
